@@ -9,7 +9,7 @@ from flask import Flask, request, jsonify, Response, send_file
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 SLSKD_URL = os.environ.get("SLSKD_URL", "http://localhost:5030")
 API_KEY = os.environ.get("SLSKD_API_KEY", "rashify-api-key-secret")
