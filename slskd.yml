@@ -1,0 +1,31 @@
+# slskd config for Railway
+debug: true
+remote_configuration: true
+no_share_scan: true
+no_version_check: true
+flags:
+  no_logo: true
+
+directories:
+  downloads: /app/downloads
+  incomplete: /app/incomplete
+
+shares:
+  directories: []
+
+web:
+  port: 5030
+  https:
+    disabled: true
+  authentication:
+    disabled: true
+    api_keys:
+      my_key:
+        key: rashify-api-key-secret
+        role: readwrite
+        cidr: 0.0.0.0/0,::/0
+
+soulseek:
+  address: vps.slsknet.org
+  username: rashtify
+  password: rashtify123

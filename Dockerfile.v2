@@ -1,0 +1,26 @@
+# Optimized: uses official slskd image (fast builds, no 54MB download)
+FROM slskd/slskd:latest AS slskd-base
+
+# Python layer on top
+FROM python:3.12-slim
+
+# Copy slskd from official image
+COPY --from=slskd-base /app /app/slskd
+RUN chmod +x /app/slskd/slskd 2>/dev/null || true
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip3 install --no-cache-dir flask flask-cors requests
+
+# Copy our files
+COPY slskd.yml /app/slskd/slskd.yml
+COPY server.py start.sh /app/
+RUN chmod +x /app/start.sh
+
+RUN mkdir -p /app/downloads /app/incomplete
+
+EXPOSE 8080 5030
+CMD ["/app/start.sh"]

@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: rashify-audio
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: "8080"
