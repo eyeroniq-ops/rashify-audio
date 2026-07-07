@@ -172,6 +172,21 @@ def download_from_soulseek(filename, username, size):
         raise
 
 
+@app.route("/raw_search")
+def raw_search():
+    """Debug: return COMPLETE raw slskd response."""
+    import uuid
+    query = request.args.get("q", "daft punk")
+    try:
+        search_id = str(uuid.uuid4())
+        slskd_request("searches", method="POST", body={"id": search_id, "query": query, "searchText": query}, timeout=5)
+        time.sleep(5)
+        results = slskd_request(f"searches/{search_id}", timeout=5)
+        return jsonify(results)
+    except Exception as e:
+        return jsonify(error=str(e))
+
+
 @app.route("/debug_search")
 def debug_search():
     """Debug endpoint: return raw slskd API response for a search."""

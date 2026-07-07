@@ -22,7 +22,6 @@ node_bundler = "esbuild"
 publish = "/Users/k3e/Documents/antigravity/focused-salk/railway-audio/dist"
 publishOrigin = "config"
 commandOrigin = "config"
-base = "/Users/k3e/Documents/antigravity/focused-salk/railway-audio"
 command = "npm run build"
 functions = "/Users/k3e/Documents/antigravity/focused-salk/railway-audio/netlify/functions"
 
